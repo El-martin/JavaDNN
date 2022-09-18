@@ -99,7 +99,7 @@ public class StrassenMatrixMultiplication {
 
     // Extracts from A a matrix the size of subA beginning at indices i, j
     public void split(double[][] A, double[][] subA, int i0, int j0) {
-        for (int i1=0, i2=j0; i1 < subA.length; i1++, i2++) {
+        for (int i1=0, i2=i0; i1 < subA.length; i1++, i2++) {
             for (int j1=0, j2=j0; j1 < subA.length; j1++, j2++) {
                 subA[i1][j1] = A[i2][j2];
             }
@@ -107,9 +107,9 @@ public class StrassenMatrixMultiplication {
     }
 
     public void join(double[][] subA, double[][] A, int i0, int j0) {
-        for (int i1=0, i2=j0; i1 < subA.length; i1++, i2++) {
+        for (int i1=0, i2=i0; i1 < subA.length; i1++, i2++) {
             for (int j1=0, j2=j0; j1 < subA.length; j1++, j2++) {
-                A[i1][j1] = subA[i2][j2];
+                A[i2][j2] = subA[i1][j1];
             }
         }
     }
