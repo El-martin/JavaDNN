@@ -396,6 +396,17 @@ public class GMatrix<T> implements Matrix, Iterable<T>
 	}
 	
 	/**
+	 * Gets the size (height, width) of the matrix as a pair of ints.
+	 * This method wasn't available for DMatrix in the original version of JMat
+	 * @author Eliot MARTIN
+	 */
+	public int[] size()
+	{
+		int[] size = new int[] {matrixData.size(), matrixData.get(0).size()};
+		return size;
+	}
+
+	/**
 	 * Returns whether the matrix is empty or not.
 	 * @return Boolean value which is {@code true} if the matrix is empty, otherwise {@code false}
 	 */
