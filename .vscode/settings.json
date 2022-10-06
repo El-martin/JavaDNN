@@ -5,9 +5,14 @@
         "lib/**/*.jar"
     ],
     "cSpell.words": [
+        "backprop",
+        "Matricial",
         "mult",
         "Multiplicator",
+        "relu",
+        "Softmax",
         "stefanbirkner",
-        "Strassen"
+        "Strassen",
+        "unactivated"
     ]
 }

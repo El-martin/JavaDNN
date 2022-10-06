@@ -462,4 +462,28 @@ public interface MatMaths
 	{
 		return matrix.transpose();
 	}
+
+	/**
+	 * Added by Eliot MARTIN
+	 * Performs the dot product of two same-sized matrices
+	 * @param A
+	 * @param B
+	 * @return dot product
+	 */
+    public static DMatrix dot(DMatrix A, DMatrix B) {
+        if (! (A.size() == B.size())) {
+			System.out.println("Matrices must have the same size");
+		}
+		int n = A.size()[0];
+		int m = A.size()[1];
+		DMatrix result = new DMatrix(n, m);
+
+		for (int i=0; i<n; i++) {
+			for (int j=0; j<m; j++) {
+				result.set(i, j, A.get(i, j) * B.get(i, j));
+			}
+		}
+
+		return result;
+    }
 }
