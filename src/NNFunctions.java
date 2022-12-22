@@ -26,8 +26,8 @@ public class NNFunctions {
         DMatrix result = new DMatrix(height, width);
 
         for (int i=0; i<height; i++) {
-            for (int j=0; j<width; j++){    
-                M.set(i, j, relu(M.get(i, j)));
+            for (int j=0; j<width; j++) {    
+                result.set(i, j, relu(M.get(i, j)));
             }
         }
         return result;
@@ -46,7 +46,7 @@ public class NNFunctions {
 
         for (int i=0; i<height; i++) {
             for (int j=0; j<width; j++){    
-                M.set(i, j, reluDerivative(M.get(i, j)));
+                result.set(i, j, reluDerivative(M.get(i, j)));
             }
         }
         return result;
@@ -78,7 +78,7 @@ public class NNFunctions {
 
         for (int i=0; i<height; i++) {
             for (int j=0; j<width; j++){
-                M.set(i, j, sigmoid(M.get(i, j)));
+                result.set(i, j, sigmoid(M.get(i, j)));
             }
         }
         return result;
@@ -98,7 +98,7 @@ public class NNFunctions {
 
         for (int i=0; i<height; i++) {
             for (int j=0; j<width; j++){
-                M.set(i, j, sigmoid(M.get(i, j)));
+                result.set(i, j, sigmoid(M.get(i, j)));
             }
         }
         return result;

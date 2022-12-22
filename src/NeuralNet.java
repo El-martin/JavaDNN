@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import JMat.DMatrix;
+import JMat.util.MatMaths;
 
 
 public class NeuralNet {
@@ -44,7 +45,7 @@ public class NeuralNet {
      * @return normalized vector
      */
     public DMatrix normalize(DMatrix vector) {
-        return null;
+        return NNFunctions.matSigmoid(vector);
     }
 
     /**
@@ -52,8 +53,13 @@ public class NeuralNet {
      * @param input vector to pass through the network
      * @return output of the network
      */
-    public DMatrix forward(DMatrix input) {
-        return null;
+    public DMatrix forward(DMatrix input, Boolean rememberForBackprop) {
+        DMatrix inVector = input.clone();
+        for (int i=0; i<NLayers(); i++) {
+            NeuralNetLayer layer = this.layers.get(i);
+            inVector = layer.forward(input, rememberForBackprop);
+        }
+        return inVector;
     }
 
     /**
@@ -62,8 +68,10 @@ public class NeuralNet {
      * @param expected Target output
      * @param actual Output produced by the network
      */
-    public void backward(DMatrix expected, DMatrix actual) {
-        
+    public void backward(DMatrix expected, DMatrix actual, Boolean showDelta) {
+        if (showDelta) {
+            System.out.println("Delta = {" + MatMaths.sub(expected, actual).norm());
+        }
     }
 
 }

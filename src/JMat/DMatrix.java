@@ -211,4 +211,32 @@ public class DMatrix extends CMatrix<Double>
 	{
 		return ConvertMatrix.toDouble(super.clone());
 	}
+
+	/**
+	 * Computes the Euclidean norm of a column or row matrix
+	 * @return norm of the instance vector
+	 * @throws IllegalArgumentException
+	 * @author Eliot MARTIN
+	 */
+	public double norm() throws IllegalArgumentException {
+		if (this.height() != 1) {
+			if (this.width() != 1) {
+				throw new IllegalArgumentException("Matrix must be column or line");
+			}
+			else {
+				Double sum = 0.;
+				for (int i=0; i<this.height(); i++) {
+					sum += Math.pow(this.get(i, 0), 2);
+				}
+				return Math.sqrt(sum);
+			}
+		}
+		else {
+			Double sum = 0.;
+			for (int i=0; i<this.width(); i++) {
+				sum += Math.pow(this.get(0, i), 2);
+			}
+			return Math.sqrt(sum);
+		}
+	}
 }

@@ -37,6 +37,15 @@ public class NeuralNetLayer {
         this.activationDerivative = activationDerivative;
     }
 
+    public NeuralNetLayer(int in, int out, double learning_rate, DMatrix weights, ActivationFunctions activation, ActivationFunctions activationDerivative) {
+        this.in_size = in;
+        this.out_size = out;
+        this.weights = weights;
+        this.lr = learning_rate;
+        this.activationFunction = activation;
+        this.activationDerivative = activationDerivative;
+    }
+
     public int[] size() {
         int[] result = new int[]{this.in_size, this.out_size};
         return result;
@@ -71,7 +80,6 @@ public class NeuralNetLayer {
         DMatrix unactivated = MatMaths.mul(this.weights, input);
         DMatrix output = unactivated.clone();
 
-        //! Activation functions ? //
         if (this.activationFunction != null) {
             output = this.activate(output);
         }
@@ -91,18 +99,16 @@ public class NeuralNetLayer {
     public DMatrix backward_propagation(DMatrix above_gradient) {
         DMatrix adjusted_mul = above_gradient.clone();
         
-        //! Create dot function //
         if (this.activationFunction != null) {
             adjusted_mul = MatMaths.dot(this.activateDerivative(this.backward_store_out), above_gradient);
         }
         // Matricial gradient for weight update
         DMatrix D_i = MatMaths.mul(adjusted_mul.transpose(), this.backward_store_in);
-        
+        update_weights(D_i);
+
         // Gradient for next layer of backprop
         DMatrix delta_i = MatMaths.mul(adjusted_mul, this.weights.transpose());
         delta_i = delta_i.getRows(-1);
-
-        update_weights(D_i);
 
         return delta_i;
         
